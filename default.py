@@ -23,13 +23,12 @@ class Daemon:
         self._stop = False
         xbmc.sleep(1000)
         if not xbmc.getCondVisibility("Player.HasMedia"):
-        #    xbmc.PlayList( xbmc.PLAYLIST_MUSIC ).load(__addon__.getSetting("playlistpath"))                     
-            xbmc.Player().play(__addon__.getSetting("playlistpath"))     
-                
-        while (not self._stop) and (not __addon__.getSetting("playonce")):
+            xbmc.Player().play(__addon__.getSetting("playlistpath"))                     
+        while (not self._stop) and (not xbmc.abortRequested):
             if not xbmc.getCondVisibility("Player.HasMedia"):
+                if __addon__.getSetting("playonce") == "false":
             #    xbmc.PlayList( xbmc.PLAYLIST_MUSIC ).load(__addon__.getSetting("playlistpath"))                     
-                xbmc.Player().play(__addon__.getSetting("playlistpath"))                     
+                    xbmc.Player().play(__addon__.getSetting("playlistpath"))                     
             else:
                 xbmc.sleep(500)     
             xbmc.sleep(1000)     
